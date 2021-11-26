@@ -1,0 +1,6 @@
+1. Incident commander name: Srishti Guleria
+2. Executive Summary of what happened: Three different pods with three different crypto miners were launched where the pods were monerpool and minergate. 
+3. Summary of what was affected : The clusters ran out of resources and the node got affected by that.
+4. Summary of the impact : Since the crypto pods have been consuming resources, spikes in CPU consumption have been observed. Hence as a result, the cluster is unable to serve the incoming traffic.
+5. Summary of the remediation steps : The grafana monitoring helped us notice this incident. The pods were terminated as a result.
+6. Summary of lessons learned : We must always keep a check on Kubernetes access from grafana as well as administrative command prompts. We must use admission controllers in order to prevent usage of unknown images for container creation.  

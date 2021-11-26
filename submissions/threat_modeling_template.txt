@@ -1,0 +1,21 @@
+Docker Thread Modeling 
+Given Docker's system components and the STRIDE framework, identify five potential threats that may arise.
+1. Any type of vulnerabiltity in the container could be used to get unauthorized access into host system by attacker. 
+2. The image permissions of the container image could be elevated via --priviledge flag. It can affect the security of the image if there is any flaw in the image libraries. 
+3. A denial-of-service attack could be triggered via exposure of host devices to containers.
+4. A denial-of-service attack could be lead using multiple forks of single docker image.
+5. Sensitive data might be left in container image by mistake and exposed at runtime. It could lead to information disclosure attack.
+
+Kubernetes Threat Modeling
+1. Any type of kubelet vulnerability can be exploited to get unauthorized access into the host system.
+2. Any type of vulnerability in Kube-Proxy could be used for sensitive data breach.
+3. If there is any vulnerability in the etcd then the attacker could use it for information disclosure attack.
+4. Kube-ApiServer vulnerabilities could lead to any spoofing attack.
+5. A denial-of-service attack could be lead if there is any vulnerability in the Kube-Scheduler.
+
+Docker-bench Run Results and Analysis
+From the failed findings, select and document 3 findings from the Docker-bench results that you want to harden based on the 5 attack surface areas you identified in Step 1. At least 1 of the 3 hardened findings should be different from the ones mentioned in the exercise (i.e. 5.10, 5.14, and 5.22)
+
+- 2.2.b Ensure the logging level is set to 'info'. Setting up an appropriate log level, configures the Docker daemon to log events that you would want to review later. A base log level of info and above would capture all logs except debug logs. Until and unless required, you should not run Docker daemon at debug log level.
+- 4.5 Ensure Content trust for Docker is Enabled. Content trust provides the ability to use digital signatures for data sent to and received from remote Docker registries. These signatures allow client-side verification of the identity and the publisher of specific image tags and ensures the provenance of container images.
+- 2.1 Ensure network traffic is restricted between containers on the default bridge. By default, unrestricted network traffic is enabled between all containers on the same host on the default network bridge. Thus, each container has the potential of reading all packets across the container network on the same host. This might lead to an unintended and unwanted disclosure of information to other containers. Hence, restrict inter-container communication on the default network bridge.
